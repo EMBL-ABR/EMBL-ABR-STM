@@ -104,10 +104,10 @@
 
     <form class="form-horizontal">
       <div class="col-xs-7 col-xs-offset-2">
-        <input class="form-control input-lg" type="text" placeholder="&nbsp;&nbsp;Search" style="padding-left: 0px;" id="q">
+        <input class="form-control input-lg" type="text" placeholder="Search" id="q">
       </div>
-      <div class="col-sm-2" style="padding-left: 0px;">
-        <button class="btn btn-success btn-lg" type="submit" onclick="search($('#q').val(), false);" id="search">Submit</button>
+      <div class="col-xs-2" style="padding-left: 0px;">
+        <input class="btn btn-success btn-lg" type="button" onclick="search($('#q').val(), false);" id="search">Submit</button>
       </div>
     </form>
 
