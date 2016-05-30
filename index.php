@@ -103,7 +103,7 @@
 
     <form class="form-horizontal">
       <div class="col-xs-7 col-xs-offset-2">
-        <input class="form-control input-lg" type="text" placeholder="Search" style="padding-left: 0px;">
+        <input class="form-control input-lg" type="text" placeholder="&nbsp;&nbsp;Search" style="padding-left: 0px;">
       </div>
       <div class="col-sm-2" style="padding-left: 0px;">
         <button class="btn btn-success btn-lg" type="submit" onclick="search($('#q').val(), false);" id="search">Submit</button>
