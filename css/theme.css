@@ -16,3 +16,24 @@ body {
 .theme-showcase .navbar .container {
   width: auto;
 }
+
+.navbar-inverse {
+    background-color: #4FA03F;
+    background-image: linear-gradient(to bottom,#52a441 0,#4FA03F 100%);
+}
+
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a {
+    text-shadow: 0 -1px 0 rgba(34, 34, 34, 0.3);
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #222;
+}
+
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a {
+    text-shadow: 0 -1px 0 rgba(2, 2, 2, 0.25);
+}
+
+.navbar-inverse .navbar-brand {
+    color: #222;
+}
