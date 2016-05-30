@@ -28,7 +28,7 @@ body {
 }
 
 .navbar-inverse .navbar-nav>li>a {
-    color: #222;
+    color: #333;
 }
 
 .navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a {
@@ -36,5 +36,13 @@ body {
 }
 
 .navbar-inverse .navbar-brand {
-    color: #222;
+    color: #333;
+}
+
+.footer {
+    background-color: #4fa03f;
+}
+
+.text-muted {
+    color: #333;
 }
