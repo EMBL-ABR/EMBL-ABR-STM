@@ -1,0 +1,80 @@
+<!doctype html>
+
+<!--Copyright 2015 Vasileios Lapatas
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+-->
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="EMBL Australian Bioinformatics Resource - Search for Training Materials">
+
+	<title>EMBL-ABR STM</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="http://digg.googlecode.com/files/Class-0.0.2.js"></script>
+	<script type="text/javascript" src="js/search.js"></script>
+
+
+	<script type="text/javascript">
+
+		$(function() {
+			$('#menu').load('menu.html');
+		});
+
+	</script>
+
+</head>
+<body>
+
+<div id="layout">
+	<!-- Menu toggle -->
+	<a href="#menu" id="menuLink" class="menu-link">
+		<!-- Hamburger icon -->
+		<span></span>
+	</a>
+
+	<div id="menu"></div>
+
+	<div id="main">
+		<div class="header">
+			<img src="img/logo.png"></img>
+			<h2>EMBL-ABR STM</h2>
+		</div>
+
+		<div class="content">
+			<h2 class="content-subhead">Sources</h2>
+			<p>
+
+			</p>
+			<h2 class="content-subhead">Get Included</h2>
+			<p>
+				If you would like STM to include a website of interest you can request it by
+				contacting us using the following form:
+			</p>
+			<form class="pure-form" action="add_request.php" method="post">
+				<input class="pure-input-1-2" type="text" placeholder="e-mail" name="email"><br />
+				<br />
+				<input class="pure-input-2-3" type-"text" placeholder="URL to be included in sources" name="url"><br />
+				<br />
+				<input class="pure-input-1"   type="text" placeholder="One sentence for the reason why this URL should be included" name="reason"><br />
+				<br />
+				<input class="pure-button pure-button-primary" type="submit" value="Send">
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>

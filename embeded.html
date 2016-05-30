@@ -1,0 +1,115 @@
+<!doctype html>
+
+<!--Copyright 2015 Vasileios Lapatas
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+-->
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="EMBL Australian Bioinformatics Resource - Search for Training Materials">
+
+	<title>EMBL-ABR STM</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="http://digg.googlecode.com/files/Class-0.0.2.js"></script>
+	<script type="text/javascript" src="js/search.js"></script>
+
+	<script type="text/javascript">
+		var s = new Search();
+
+		function search(q, only_files) {
+			s.search(q, only_files);
+		}
+
+		function view(v) {
+			if(v == "table") {
+				$('#results').html(s.table_view);
+			} else if(v == "google") {
+				$('#results').html(s.google_view);
+			}
+		}
+
+		$( document ).ready(function() {
+			$('#q').keyup(function(event){
+				if(event.keyCode == 13){
+					$('#search').click();
+				}
+			});
+		});
+
+		$(function() {
+			$('#menu').load('menu.html');
+		});
+	</script>
+
+</head>
+<body>
+
+<div id="layout">
+	<div id="main">
+		<div class="content-center">
+
+			<h2 class="content-subhead">Search</h2>
+
+			<div class="pure-form">
+				<input class="pure-input-1" type="text" placeholder="e.g. genomics" id="q"></input><br /><br />
+				<button class="pure-button pure-button-primary" type="button" onclick="search($('#q').val(), false);" id="search">Search</button>
+				<button class="pure-button" type="button" onclick="search($('#q').val(), true);">Files Only</button><br /><br />
+				<div class="pure-g">
+					<div class="pure-u-1-8"></div>
+					<div class="pure-u-1-8"></div>
+					<div class="pure-u-1-8"></div>
+					<div class="pure-u-1-8">
+						<label for="tradio" class="pure-radio">
+							<input type="radio" name="view" onclick="view('table');" id="tradio" checked="checked">
+							Table
+						</label>
+					</div>
+					<div class="pure-u-1-8">
+						<label for="gradio" class="pure-radio">
+							<input type="radio" name="view" onclick="view('google');" id="gradio">
+							Google
+						</label>
+					</div>
+					<div class="pure-u-1-8"></div>
+					<div class="pure-u-1-8"></div>
+					<div class="pure-u-1-8"></div>
+				</div>
+
+				<label for="sort">Sort by:</label>
+				<select id="sort" onchange="s.sort_by(this.value)">
+					<option value="-">-</option>
+					<option value="title">Title</option>
+					<option value="link">Site</option>
+				</select>
+			</div>
+		</div>
+		<div class="content">
+			<h2 class="content-subhead">Results</h2>
+			<div id="results" class="pure-table pure-table-horizontal" style="border-width:0px"></div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+<script src="js/ui.js"></script>
+
+
+</body>
+</html>
