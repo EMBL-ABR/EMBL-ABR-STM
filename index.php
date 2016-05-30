@@ -28,6 +28,7 @@
     <script src="js/ie-emulation-modes-warning.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery.min.js"><\/script>')</script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -103,7 +104,7 @@
 
     <form class="form-horizontal">
       <div class="col-xs-7 col-xs-offset-2">
-        <input class="form-control input-lg" type="text" placeholder="&nbsp;&nbsp;Search" style="padding-left: 0px;">
+        <input class="form-control input-lg" type="text" placeholder="&nbsp;&nbsp;Search" style="padding-left: 0px;" id="q">
       </div>
       <div class="col-sm-2" style="padding-left: 0px;">
         <button class="btn btn-success btn-lg" type="submit" onclick="search($('#q').val(), false);" id="search">Submit</button>
@@ -122,7 +123,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
 
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <!--<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>-->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
