@@ -20,6 +20,7 @@ body {
 .navbar-inverse {
     background-color: #4FA03F;
     background-image: linear-gradient(to bottom,#52a441 0,#4FA03F 100%);
+    border-color: #3D8E2C;
 }
 
 .navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a {
