@@ -96,14 +96,15 @@
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="starter-template">
-        <img src="img/embl-au-logo.jpg" style="width: 10%;"/>
+        <img src="img/embl-au-logo.jpg" style="width: 35%; display: block; margin-left: auto; margin-right: auto; padding-bottom: 10px;"/>
         <h1>EMBL-ABR Search for Training Materials</h1>
-        <p class="lead">Find bioinformatics training materials from instituions worldwide.</p>
+        <p class="lead">Easily find bioinformatics training materials from institutions worldwide.</p>
       </div>
 
+    <form class="form-inline">
       <input class="form-control input-lg" type="text" placeholder="Search">
-      <button class="btn btn-default btn-lg" type="button" onclick="search($('#q').val(), false);" id="search">Submit</button>
-
+      <button class="btn btn-success btn-lg" type="submit" onclick="search($('#q').val(), false);" id="search">Submit</button>
+    </form>
 
     </div> <!-- /container -->
 
