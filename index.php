@@ -96,6 +96,7 @@
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="starter-template">
+        <img src="img/embl-au-logo.jpg" style="width: 10%;"/>
         <h1>EMBL-ABR Search for Training Materials</h1>
         <p class="lead">Find bioinformatics training materials from instituions worldwide.</p>
       </div>
