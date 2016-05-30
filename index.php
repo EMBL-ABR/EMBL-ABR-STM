@@ -22,9 +22,9 @@
     <link href="css/theme.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="js/ie-emulation-modes-warning.js"></script>
-    <link href="sticky-footer-navbar.css" rel="stylesheet">
+    <link href="css/sticky-footer-navbar.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -33,7 +33,7 @@
     <![endif]-->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="http://digg.googlecode.com/files/Class-0.0.2.js"></script>
+    <script src="https://digg.googlecode.com/files/Class-0.0.2.js"></script>
     <script type="text/javascript" src="js/search.js"></script>
 
     <script type="text/javascript">
