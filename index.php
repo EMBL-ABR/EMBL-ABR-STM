@@ -101,9 +101,13 @@
         <p class="lead">Easily find bioinformatics training materials from institutions worldwide.</p>
       </div>
 
-    <form class="form-inline">
-      <input class="form-control input-lg" type="text" placeholder="Search">
-      <button class="btn btn-success btn-lg" type="submit" onclick="search($('#q').val(), false);" id="search">Submit</button>
+    <form class="form-horizontal">
+      <div class="col-sm-10">
+        <input class="form-control input-lg" type="text" placeholder="Search">
+      </div>
+      <div class="col-sm-2">
+        <button class="btn btn-success btn-lg" type="submit" onclick="search($('#q').val(), false);" id="search">Submit</button>
+      </div>
     </form>
 
     </div> <!-- /container -->
