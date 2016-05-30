@@ -34,7 +34,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
     <script src="https://digg.googlecode.com/files/Class-0.0.2.js"></script>
     <script type="text/javascript" src="js/search.js"></script>
 
@@ -102,10 +102,10 @@
       </div>
 
     <form class="form-horizontal">
-      <div class="col-sm-10">
-        <input class="form-control input-lg" type="text" placeholder="Search">
+      <div class="col-xs-7 col-xs-offset-2">
+        <input class="form-control input-lg" type="text" placeholder="Search" style="padding-left: 0px;">
       </div>
-      <div class="col-sm-2">
+      <div class="col-sm-2" style="padding-left: 0px;">
         <button class="btn btn-success btn-lg" type="submit" onclick="search($('#q').val(), false);" id="search">Submit</button>
       </div>
     </form>
