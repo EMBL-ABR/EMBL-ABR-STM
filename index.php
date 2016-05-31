@@ -107,7 +107,7 @@
         <input class="form-control input-lg" type="text" placeholder="Search" id="q">
       </div>
       <div class="col-xs-2" style="padding-left: 0px;">
-        <input class="btn btn-success btn-lg" type="button" onclick="search($('#q').val(), false);" id="search">Submit</button>
+        <button class="btn btn-success btn-lg" onclick="search($('#q').val(), false);" id="search">Submit</button>
       </div>
     </form>
 
