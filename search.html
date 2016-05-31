@@ -39,27 +39,6 @@
     <script src="https://digg.googlecode.com/files/Class-0.0.2.js"></script>
     <script type="text/javascript" src="js/search.js"></script>
 
-    <script type="text/javascript">
-      var s = new Search();
-
-      function search() {
-        q = "test";
-        only_files = false;
-        s.search(q, only_files, true);
-      }
-
-      function view(v) {
-        if(v == "table") {
-          $('#results').html(s.table_view);
-        } else if(v == "google") {
-          $('#results').html(s.google_view);
-        }
-      }
-
-      function myFunc() {
-        window.alert("here")
-      }
-    </script>
 
   </head>
 
@@ -94,15 +73,9 @@
         <input class="form-control input-lg" type="text" placeholder="Search" id="q">
       </div>
       <div class="col-xs-2" style="padding-left: 0px;">
-        <button type="button" class="btn btn-success btn-lg" onclick="search();" id="search">Submit</button>
+        <button type="button" class="btn btn-success btn-lg" onclick="srch();" id="search">Submit</button>
       </div>
     </form>
-
-    <script type="text/javascript">
-      function testFunction() {
-        window.alert("here - testFunction")
-      }
-    </script>
 
     </div> <!-- /container -->
 
@@ -121,10 +94,22 @@
     <script src="js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
-
+    
     <script type="text/javascript">
-      function testFunc() {
-        window.alert("here - testFunc")
+      var s = new Search();
+
+      function srch() {
+        q = "test";
+        only_files = false;
+        s.search(q, only_files, true);
+      }
+
+      function view(v) {
+        if(v == "table") {
+          $('#results').html(s.table_view);
+        } else if(v == "google") {
+          $('#results').html(s.google_view);
+        }
       }
     </script>
   </body>
