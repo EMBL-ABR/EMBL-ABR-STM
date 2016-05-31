@@ -65,6 +65,10 @@
       $(function() {
         $('#menu').load('menu.html');
       });
+
+      function myFunc() {
+        window.alert("here")
+      }
     </script>
 
   </head>
@@ -100,9 +104,21 @@
         <input class="form-control input-lg" type="text" placeholder="Search" id="q">
       </div>
       <div class="col-xs-2" style="padding-left: 0px;">
-        <button class="btn btn-success btn-lg" onclick="search($('#q').val(), false);" id="search">Submit</button>
+        <button class="btn btn-success btn-lg" onclick="myFunc();" id="search">Submit</button>
+      </div>
+      <div class="col-xs-2" style="padding-left: 0px;">
+        <button class="btn btn-success btn-lg" onclick="testFunc();" id="search">Submit</button>
+      </div>
+      <div class="col-xs-2" style="padding-left: 0px;">
+        <button class="btn btn-success btn-lg" onclick="testFunction();" id="search">Submit</button>
       </div>
     </form>
+
+    <script type="text/javascript">
+      function testFunction() {
+        window.alert("here - testFunction")
+      }
+    </script>
 
     </div> <!-- /container -->
 
@@ -121,5 +137,11 @@
     <script src="js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
+
+    <script type="text/javascript">
+      function testFunc() {
+        window.alert("here - testFunc")
+      }
+    </script>
   </body>
 </html>
