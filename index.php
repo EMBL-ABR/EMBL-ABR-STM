@@ -39,34 +39,6 @@
     <script src="https://digg.googlecode.com/files/Class-0.0.2.js"></script>
     <script type="text/javascript" src="js/search.js"></script>
 
-    <script type="text/javascript">
-      var s = new Search();
-
-      function search(q, only_files) {
-        s.search(q, only_files, true);
-      }
-
-      function view(v) {
-        if(v == "table") {
-          $('#results').html(s.table_view);
-        } else if(v == "google") {
-          $('#results').html(s.google_view);
-        }
-      }
-
-      $( document ).ready(function() {
-        $('#q').keyup(function(event){
-          if(event.keyCode == 13){
-            $('#search').click();
-          }
-        });
-      });
-
-      $(function() {
-        $('#menu').load('menu.html');
-      });
-    </script>
-
   </head>
 
   <body role="document">
@@ -107,17 +79,9 @@
         <input class="form-control input-lg" type="text" placeholder="Search" id="q">
       </div>
       <div class="col-xs-2" style="padding-left: 0px;">
-        <button class="btn btn-success btn-lg" onclick="myFunction();" id="search">Submit</button>
+        <button class="btn btn-success btn-lg" onclick="search($('#q').val(), false);" id="search">Submit</button>
       </div>
     </form>
-
-
-
-        <script>
-        function myFunction() {
-            window.alert("here");
-        }
-        </script>
 
 
     </div> <!-- /container -->
@@ -137,5 +101,34 @@
     <script src="js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
+
+    <script type="text/javascript">
+      var s = new Search();
+
+      function search(q, only_files) {
+        s.search(q, only_files, true);
+      }
+
+      function view(v) {
+        if(v == "table") {
+          $('#results').html(s.table_view);
+        } else if(v == "google") {
+          $('#results').html(s.google_view);
+        }
+      }
+
+      $( document ).ready(function() {
+        $('#q').keyup(function(event){
+          if(event.keyCode == 13){
+            $('#search').click();
+          }
+        });
+      });
+
+      $(function() {
+        $('#menu').load('menu.html');
+      });
+    </script>
+
   </body>
 </html>
