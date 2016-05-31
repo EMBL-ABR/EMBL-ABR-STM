@@ -56,18 +56,6 @@
         }
       }
 
-      $( document ).ready(function() {
-        $('#q').keyup(function(event){
-          if(event.keyCode == 13){
-            $('#search').click();
-          }
-        });
-      });
-
-      $(function() {
-        $('#menu').load('menu.html');
-      });
-
       function myFunc() {
         window.alert("here")
       }
@@ -106,13 +94,7 @@
         <input class="form-control input-lg" type="text" placeholder="Search" id="q">
       </div>
       <div class="col-xs-2" style="padding-left: 0px;">
-        <button class="btn btn-success btn-lg" onclick="search();" id="search">Submit</button>
-      </div>
-      <div class="col-xs-2" style="padding-left: 0px;">
-        <button class="btn btn-success btn-lg" onclick="testFunc();" id="search">Submit</button>
-      </div>
-      <div class="col-xs-2" style="padding-left: 0px;">
-        <button class="btn btn-success btn-lg" onclick="testFunction();" id="search">Submit</button>
+        <button type="button" class="btn btn-success btn-lg" onclick="search();" id="search">Submit</button>
       </div>
     </form>
 
