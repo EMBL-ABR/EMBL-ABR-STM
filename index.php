@@ -113,6 +113,13 @@
 
 
 
+        <script>
+        function myFunction() {
+            window.alert("here");
+        }
+        </script>
+
+
     </div> <!-- /container -->
 
     <footer class="footer">
