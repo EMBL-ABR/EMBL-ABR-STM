@@ -52,7 +52,19 @@ var Search = Class.create({
 					self.refresh = false;
 					return;
 				}
-				return;
+				self.response = jQuery.parseJSON(data);
+				self.items = jQuery.parseJSON(data).items;
+				for(var i = 0; i < self.items.length; i++) {
+					if (self.items[i].files.length == 0 && self.only_files) {
+						delete self.items[i];
+					}
+				}
+				self.show_results();
+				self.sort_by($('#sort').val());
+				if(self.refresh) {
+					self.refresh   = false;
+					setTimeout(function() {self.search(self.q, self.only_files);}, 5000);
+				}
 			}
 		});
 	},

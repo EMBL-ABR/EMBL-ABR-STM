@@ -18,7 +18,10 @@ You may obtain a copy of the License at
 
 require_once('search.php');
 
+echo "here"
 $q = $_GET['q'];
+echo "here"
+
 if($idx = strpos($q, '&')) {
 	$query = substr($q, 0, $idx);
 	$q     = substr($q, $idx);
