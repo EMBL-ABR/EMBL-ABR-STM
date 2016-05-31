@@ -18,9 +18,12 @@ You may obtain a copy of the License at
 
 require_once('search.php');
 
-echo "here"
+include 'ChromePhp.php';
+ChromePhp::log('Hello console!');
+ChromePhp::log($_SERVER);
+ChromePhp::warn('something went wrong!');
+
 $q = $_GET['q'];
-echo "here"
 
 if($idx = strpos($q, '&')) {
 	$query = substr($q, 0, $idx);
