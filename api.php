@@ -18,11 +18,6 @@ You may obtain a copy of the License at
 
 require_once('search.php');
 
-include 'ChromePhp.php';
-ChromePhp::log('Hello console!');
-ChromePhp::log($_SERVER);
-ChromePhp::warn('something went wrong!');
-
 $q = $_GET['q'];
 
 if($idx = strpos($q, '&')) {

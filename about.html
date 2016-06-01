@@ -1,72 +1,96 @@
-<!doctype html>
-
-<!--Copyright 2015 Vasileios Lapatas
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-	http://www.apache.org/licenses/LICENSE-2.0
-
-	Unless required by applicable law or agreed to in writing, software
-	distributed under the License is distributed on an "AS IS" BASIS,
-	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	See the License for the specific language governing permissions and
-	limitations under the License.
--->
-
+<!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="EMBL Australian Bioinformatics Resource - Search for Training Materials">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
 
-	<title>EMBL-ABR STM</title>
+    <title>EMBL-ABR STM</title>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src="http://digg.googlecode.com/files/Class-0.0.2.js"></script>
-	<script type="text/javascript" src="js/search.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- Footer theme -->
+    <link href="css/sticky-footer-navbar.css" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
-	<script type="text/javascript">
+    <!-- Custom styles for this template -->
+    <link href="css/theme.css" rel="stylesheet">
 
-		$(function() {
-			$('#menu').load('menu.html');
-		});
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="js/ie-emulation-modes-warning.js"></script>
 
-	</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!--<script>window.jQuery || document.write('<script src="js/vendor/jquery.min.js"><\/script>')</script>-->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
-</head>
-<body>
 
-<div id="layout">
-	<!-- Menu toggle -->
-	<a href="#menu" id="menuLink" class="menu-link">
-		<!-- Hamburger icon -->
-		<span></span>
-	</a>
+  </head>
 
-	<div id="menu"></div>
+  <body role="document">
 
-	<div id="main">
-		<div class="header">
-			<img src="img/logo.png"></img>
-			<h2>EMBL-ABR Search for Training Materials</h2>
-		</div>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">EMBL-ABR STM</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="search.html">Search</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="sources.html">Sources</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
 
-		<div class="content">
-			<h2 class="content-subhead">About</h2>
-			<p>
-				EMBL-ABR STM (Search for Training Materials) is a web-based tool using a custom Google search engine to find bioinformatics training materials from various
-				organisations both in Australia and worldwide.
-			</p>
+    <div class="container theme-showcase" role="main">
+      <div class="starter-template">
+        <h1>About</h1>
+        <p class="lead">EMBL-ABR STM (Search for Training Materials) is a web-based tool using a custom Google search engine to find bioinformatics training materials from various
+								organisations both in Australia and worldwide. insert BATMAT citation.</p>
 
-			<h2 class="content-subhead">Where can you find the code?</h2>
-			<p>
-				EMBL-ABR STM's code is made available under the GNU GPL 3.0 license. You can find the code on
-				<a href="https://github.com/madiflannery/EMBL-ABR-STM">GitHub</a>
-			</p>
-		</div>
-	</div>
-</div>
-</body>
+				<h1>Where can I find the code?</h1>
+				<p>EMBL-ABR STM's code is made available under the GNU GPL 3.0 license. You can find the code on
+				<a href="https://github.com/madiflannery/EMBL-ABR-STM">GitHub</a></p>
+      </div>
+
+    </div> <!-- /container -->
+
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">&copy; EMBL-ABR 2016</p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <!--<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>-->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/docs.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+  </body>
 </html>
