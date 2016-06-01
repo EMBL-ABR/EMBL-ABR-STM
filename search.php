@@ -36,6 +36,7 @@ class Search {
 		$req = $this->google_url."&q=".$q;
 		$this->response = $this->get_results($req);
 		$this->response = $this->get_files($this->response);
+		
 		$this->prepare_next_req($req);
 
 		return $this->response;

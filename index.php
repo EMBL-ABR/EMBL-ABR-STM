@@ -27,17 +27,23 @@
     <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="js/ie-emulation-modes-warning.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery.min.js"><\/script>')</script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+    <!--<script>window.jQuery || document.write('<script src="js/vendor/jquery.min.js"><\/script>')</script>-->
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://digg.googlecode.com/files/Class-0.0.2.js"></script>
     <script type="text/javascript" src="js/search.js"></script>
+
+    <style>
+      .starter-template {
+          text-align: center;
+      }
+    </style>
 
   </head>
 
@@ -81,7 +87,7 @@
         <input class="form-control input-lg" type="text" placeholder="Search" id="q">
       </div>
       <div class="col-xs-2" style="padding-left: 0px;">
-        <button class="btn btn-success btn-lg" onclick="search($('#q').val(), false);" id="search">Submit</button>
+        <button type="button" class="btn btn-success btn-lg" onclick="srch();" id="search">Submit</button>
       </div>
     </form>
 
@@ -107,29 +113,11 @@
     <script type="text/javascript">
       var s = new Search();
 
-      function search(q, only_files) {
+      function srch() {
+        var q = "test";
+        var only_files = false;
         s.search(q, only_files, true);
       }
-
-      function view(v) {
-        if(v == "table") {
-          $('#results').html(s.table_view);
-        } else if(v == "google") {
-          $('#results').html(s.google_view);
-        }
-      }
-
-      $( document ).ready(function() {
-        $('#q').keyup(function(event){
-          if(event.keyCode == 13){
-            $('#search').click();
-          }
-        });
-      });
-
-      $(function() {
-        $('#menu').load('menu.html');
-      });
     </script>
 
   </body>

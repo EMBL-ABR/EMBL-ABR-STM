@@ -45,6 +45,7 @@ var Search = Class.create({
 		var req = this.url + "?q=" + encodeURIComponent(this.q);
 
 		self = this;
+		
 		$.ajax({
 			url: req,
 			success: function( data ) {

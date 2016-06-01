@@ -37,8 +37,8 @@
     <![endif]-->
 
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
-    <!--<script src="https://digg.googlecode.com/files/Class-0.0.2.js"></script>
-    <script type="text/javascript" src="js/search.js"></script>-->
+    <script src="https://digg.googlecode.com/files/Class-0.0.2.js"></script>
+    <script type="text/javascript" src="js/search.js"></script>
 
 
   </head>
@@ -76,11 +76,9 @@
         <input class="form-control input-lg" type="text" placeholder="Search" id="q">
       </div>
       <div class="col-xs-2" style="padding-left: 0px;">
-        <button type="button" class="btn btn-success btn-lg" onclick="srch();" id="search">Submit</button>
+        <button type="button" class="btn btn-success btn-lg" onclick="search();" id="search">Submit</button>
       </div>
     </form>
-
-    <div id="content"></div>
 
     </div> <!-- /container -->
 
@@ -101,16 +99,14 @@
     <script src="js/ie10-viewport-bug-workaround.js"></script>
 
 
-    <script>
-      function hndlr(response) {
-      for (var i = 0; i < response.items.length; i++) {
-        var item = response.items[i];
-        // in production code, item.htmlTitle should have the HTML entities escaped.
-        document.getElementById("content").innerHTML += "<br>" + item.htmlTitle;
+    <script type="text/javascript">
+      var s = new Search();
+
+      function search() {
+        var q = 'test';
+        var only_files = false;
+        s.search(q, only_files, true);
       }
-    }
-    </script>
-    <script src="https://www.googleapis.com/customsearch/v1?key=AIzaSyA-NekVaX3oD9feZDgPPxGf-e45TOyspw0&amp;cx=011595524696795372312:tmhiboh2zco&amp;q=test&amp;callback=hndlr">
     </script>
 
   </body>

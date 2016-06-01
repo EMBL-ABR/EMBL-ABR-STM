@@ -16,6 +16,7 @@ You may obtain a copy of the License at
 	limitations under the License.
 */
 
+
 require_once('search.php');
 
 $q = $_GET['q'];
