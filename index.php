@@ -59,11 +59,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">EMBL-ABR STM</a>
+          <a class="navbar-brand" href="/">EMBL-ABR STM</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
+            <li class="active"><a href="/">Home</a></li>
             <li><a href="search.html">Search</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="sources.html">Sources</a></li>
