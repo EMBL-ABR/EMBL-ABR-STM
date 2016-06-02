@@ -76,13 +76,13 @@
     <div class="container theme-showcase" role="main">
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
-      
+
     <form class="form-horizontal">
       <div class="col-xs-7 col-xs-offset-2">
         <input class="form-control input-lg" type="text" placeholder="Search" id="q">
       </div>
       <div class="col-xs-2" style="padding-left: 0px;">
-        <button type="button" class="btn btn-success btn-lg" onclick="srch($('#q').val(), false);" id="search">Submit</button>
+        <button type="button" class="btn btn-success btn-lg" onclick="if(q){srch($('#q').val(), false);}" id="search">Submit</button>
       </div>
     </form>
 
@@ -111,8 +111,33 @@
 
       function srch(q, only_files) {
         s.search(q, only_files, true);
-
+        window.history.pushState('search', 'EMBL-ABR STM', '/search.html' + "?q=" + q + "&" + "onlyfiles=false");
       }
+
+      function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+          vars[key] = value;
+        });
+        return vars;
+      }
+
+      $( document ).ready(function() {
+        var q = getUrlVars()["q"];
+        var only_files = (getUrlVars()["onlyfiles"] === 'true');
+        if(q) {
+          srch(q, only_files);
+          var txtbox = document.getElementById("q");
+          txtbox.value = txtbox.value + q;
+        }
+      });
+
+      $("q").on( "keypress", function(event) {
+        if (event.which == 13 && !event.shiftKey) {
+            event.preventDefault();
+            srch();
+        }
+      });
     </script>
 
   </body>

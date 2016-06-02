@@ -87,11 +87,9 @@
         <input class="form-control input-lg" type="text" placeholder="Search" id="q">
       </div>
       <div class="col-xs-2" style="padding-left: 0px;">
-        <button type="button" class="btn btn-success btn-lg" onclick="srch($('#q').val(), false);" id="search">Submit</button>
+        <button type="button" class="btn btn-success btn-lg" onclick="goSearchURL($('#q').val());" id="search">Submit</button>
       </div>
     </form>
-
-    <div id="results" style="margin-top: 100px;"></div>
 
     </div> <!-- /container -->
 
@@ -112,11 +110,10 @@
     <script src="js/ie10-viewport-bug-workaround.js"></script>
 
     <script type="text/javascript">
-      var s = new Search();
-
-      function srch(q, only_files) {
-        s.search(q, only_files, true);
-
+      function goSearchURL(q) {
+        if(q !== "") {
+          location.href="/search.html?" + "q=" + q + "&" + "onlyfiles=false";
+        }
       }
     </script>
 
