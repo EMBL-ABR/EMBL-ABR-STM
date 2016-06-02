@@ -45,7 +45,7 @@ var Search = Class.create({
 		var req = this.url + "?q=" + encodeURIComponent(this.q);
 
 		self = this;
-		
+
 		$.ajax({
 			url: req,
 			success: function( data ) {
@@ -55,19 +55,35 @@ var Search = Class.create({
 				}
 				self.response = jQuery.parseJSON(data);
 				self.items = jQuery.parseJSON(data).items;
-				for(var i = 0; i < self.items.length; i++) {
-					if (self.items[i].files.length == 0 && self.only_files) {
-						delete self.items[i];
+				var items_len = 0;
+				if(self.items) {
+					items_len = self.items.length;
+					for(var i = 0; i < self.items.length; i++) {
+						if (self.items[i].files.length == 0 && self.only_files) {
+							delete self.items[i];
+							items_len = items_len - 1;
+						}
 					}
 				}
-				self.show_results();
-				self.sort_by($('#sort').val());
-				if(self.refresh) {
-					self.refresh   = false;
-					setTimeout(function() {self.search(self.q, self.only_files);}, 5000);
+
+				if(items_len === 0) {
+					self.no_results();
+				}
+				else {
+					self.show_results();
+					self.sort_by($('#sort').val());
+					if(self.refresh) {
+						self.refresh   = false;
+						setTimeout(function() {self.search(self.q, self.only_files);}, 5000);
+					}
 				}
 			}
 		});
+	},
+
+	no_results: function() {
+		$("#results").html("<div class=\"col-md-6 col-md-offset-3\"><div class=\"alert alert-danger\" role=\"alert\" style=\"clear: left; text-align: center;\">There were no results for that query. Please try a different search term.</div></div>");
+
 	},
 
 	show_results: function() {
@@ -109,14 +125,14 @@ var Search = Class.create({
 
 	get_table_view: function() {
 
-		var table  = "<table><thead>";
-		table     += "<tr><th>Site</th><th>Title</th><th>Description</th><th>Files</th></tr></thead><tbody>";
+		var table  = "<table class=\"table\"><thead>";
+		table     += "<tr><th><h4>Site</h4></th><th><h4>Title</h4></th><th><h4>Description</h4></th><th style=\"max-width: 300px; overflow-wrap: break-word;\"><h4>Files</h4></th></tr></thead><tbody>";
 		if (this.items.length == 0) {
 			table += "<tr><td colspan=\"4\"> No results found</td></tr></tbody></table>";
 		} else {
 			for(var i = 0; i < this.items.length; i++) {
 				if(typeof(this.items[i]) != "undefined") {
-					table += "<tr><td>" + this.items[i].displayLink + "</td><td><a href=\"" + this.items[i].link + "\">" + this.items[i].title + "</a></td><td>" + this.items[i].htmlSnippet + "</td><td>" + this._get_file_html(this.items[i].files) + "</td></tr>";
+					table += "<tr><td>" + this.items[i].displayLink + "</td><td><a href=\"" + this.items[i].link + "\">" + this.items[i].title + "</a></td><td>" + this.items[i].htmlSnippet + "</td><td style=\"max-width: 300px; overflow-wrap: break-word;\">" + this._get_file_html(this.items[i].files) + "</td></tr>";
 				}
 			}
 			table += "</tbody></table>";

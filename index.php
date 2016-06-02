@@ -87,10 +87,11 @@
         <input class="form-control input-lg" type="text" placeholder="Search" id="q">
       </div>
       <div class="col-xs-2" style="padding-left: 0px;">
-        <button type="button" class="btn btn-success btn-lg" onclick="srch();" id="search">Submit</button>
+        <button type="button" class="btn btn-success btn-lg" onclick="srch($('#q').val(), false);" id="search">Submit</button>
       </div>
     </form>
 
+    <div id="results" style="margin-top: 100px;"></div>
 
     </div> <!-- /container -->
 
@@ -113,10 +114,9 @@
     <script type="text/javascript">
       var s = new Search();
 
-      function srch() {
-        var q = "test";
-        var only_files = false;
+      function srch(q, only_files) {
         s.search(q, only_files, true);
+
       }
     </script>
 
