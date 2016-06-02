@@ -28,7 +28,6 @@
     <script src="js/ie-emulation-modes-warning.js"></script>
 
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!--<script>window.jQuery || document.write('<script src="js/vendor/jquery.min.js"><\/script>')</script>-->
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -36,10 +35,15 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://digg.googlecode.com/files/Class-0.0.2.js"></script>
     <script type="text/javascript" src="js/search.js"></script>
 
+    <style>
+      .starter-template {
+          text-align: center;
+      }
+    </style>
 
   </head>
 
@@ -71,14 +75,18 @@
 
     <div class="container theme-showcase" role="main">
 
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      
     <form class="form-horizontal">
       <div class="col-xs-7 col-xs-offset-2">
         <input class="form-control input-lg" type="text" placeholder="Search" id="q">
       </div>
       <div class="col-xs-2" style="padding-left: 0px;">
-        <button type="button" class="btn btn-success btn-lg" onclick="search();" id="search">Submit</button>
+        <button type="button" class="btn btn-success btn-lg" onclick="srch($('#q').val(), false);" id="search">Submit</button>
       </div>
     </form>
+
+    <div id="results" style="margin-top: 100px;"></div>
 
     </div> <!-- /container -->
 
@@ -98,14 +106,12 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
 
-
     <script type="text/javascript">
       var s = new Search();
 
-      function search() {
-        var q = 'test';
-        var only_files = false;
+      function srch(q, only_files) {
         s.search(q, only_files, true);
+
       }
     </script>
 
