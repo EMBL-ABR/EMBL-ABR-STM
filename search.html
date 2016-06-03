@@ -180,12 +180,9 @@
 
       $( document ).ready(function() {
         var q = getUrlVars()["q"];
-        var only_files = (getUrlVars()["onlyfiles"] === 'true');
-        if(q) {
-          srch(q, only_files);
-          var txtbox = document.getElementById("q");
-          txtbox.value = txtbox.value + q;
-        }
+        srch(q, false);
+        var txtbox = document.getElementById("q");
+        txtbox.value = txtbox.value + q;
       });
 
       $("q").on( "keypress", function(event) {

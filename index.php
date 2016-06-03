@@ -92,7 +92,6 @@
         </div>
       </form>
     </div>
-    
 
     <footer class="footer">
       <div class="container">
@@ -113,7 +112,7 @@
     <script type="text/javascript">
       function goSearchURL(q) {
         if(q !== "") {
-          location.href="/search.html?" + "q=" + q + "&" + "onlyfiles=false";
+          location.href="/search.html?" + "q=" + q;
         }
       }
     </script>
