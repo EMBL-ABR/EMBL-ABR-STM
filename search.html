@@ -73,22 +73,70 @@
       </div>
     </nav>
 
-    <div class="container theme-showcase" role="main">
+    <div class="container" style="padding-top: 10px;">
+      <form class="form-horizontal">
+        <div class="col-xs-7 col-xs-offset-2">
+          <input class="form-control input-lg" type="text" placeholder="Search" id="q">
+        </div>
+        <div class="col-xs-2" style="padding-left: 0px;">
+          <button type="button" class="btn btn-success btn-lg" onclick="srch($('#q').val(), false);" id="search">Submit</button>
+        </div>
+      </form>
+    </div>
 
-      <!-- Main jumbotron for a primary marketing message or call to action -->
-
-    <form class="form-horizontal">
-      <div class="col-xs-7 col-xs-offset-2">
-        <input class="form-control input-lg" type="text" placeholder="Search" id="q">
+    <div class="container" style="padding-top: 20px;">
+      <div class="col-xs-3 col-xs-offset-2">
+        <p class="lead">0 Results</p>
       </div>
-      <div class="col-xs-2" style="padding-left: 0px;">
-        <button type="button" class="btn btn-success btn-lg" onclick="if(q){srch($('#q').val(), false);}" id="search">Submit</button>
+      <div class="col-xs-3" style="padding-left: 0px;">
+        <p class="lead"><a href="#collapseExample" data-toggle="collapse">Options <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a></p>
       </div>
-    </form>
+    </div>
 
-    <div id="results" style="margin-top: 100px;"></div>
-
+    <div class="collapse" id="collapseExample">
+      <div class="container">
+        <div style="clear: left;">
+          <div class="col-xs-3 col-xs-offset-2">
+            <h4> Filter </h4>
+          </div>
+          <div class="col-xs-3" style="padding-left: 0px;">
+            <h4> Sort </h4>
+          </div>
+          <div class="col-xs-3" style="padding-left: 0px;">
+            <h4> View </h4>
+          </div>
+          <div class="col-xs-1"></div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="btn-toolbar" role="toolbar" style="clear: left;">
+          <div class="col-xs-3 col-xs-offset-2">
+            <div class="btn-group" data-toggle="buttons" aria-label="filter">
+              <label class="btn btn-success active"><input type="radio" name="options" id="filter_none" autocomplete="off" checked>None</label>
+              <label class="btn btn-success"><input type="radio" name="options" id="filter_files" autocomplete="off">Files Only</label>
+            </div>
+          </div>
+          <div class="col-xs-3" style="padding-left: 0px;">
+            <div class="btn-group" data-toggle="buttons" aria-label="sort">
+              <label class="btn btn-success active"><input type="radio" name="options" id="sort_default" autocomplete="off" checked>Default</label>
+              <label class="btn btn-success"><input type="radio" name="options" id="sort_title" autocomplete="off">Title</label>
+              <label class="btn btn-success"><input type="radio" name="options" id="sort_site" autocomplete="off">Site</label>
+            </div>
+          </div>
+          <div class="col-xs-3" style="padding-left: 0px;">
+            <div class="btn-group" data-toggle="buttons" aria-label="view">
+              <label class="btn btn-success active"><input type="radio" name="options" id="view_default" autocomplete="off" checked>Default</label>
+              <label class="btn btn-success"><input type="radio" name="options" id="view_google" autocomplete="off">Google</label>
+            </div>
+          </div>
+        </div>
+      </div>
     </div> <!-- /container -->
+    <div class="container" style="padding-top: 20px">
+      <div class="col-xs-10 col-xs-offset-1">
+        <div id="results"></div>
+      </div>
+    </div>
 
     <footer class="footer">
       <div class="container">
@@ -122,6 +170,14 @@
         return vars;
       }
 
+      function view(v) {
+        if(v === "table") {
+          $('#results').html(s.table_view);
+        } else if(v === "google") {
+          $('#results').html(s.google_view);
+        }
+      }
+
       $( document ).ready(function() {
         var q = getUrlVars()["q"];
         var only_files = (getUrlVars()["onlyfiles"] === 'true');
@@ -138,6 +194,32 @@
             srch();
         }
       });
+
+      $('#filter_none').on('change', function(){
+        srch($('#q').val(), false);
+        $('#filter_files').removeAttr('checked');
+        $('#filter_none').attr('checked', 'checked');
+      });
+
+      $('#filter_files').on('change', function(){
+        srch($('#q').val(), true);
+        $('#filter_none').removeAttr('checked');
+        $('#filter_files').attr('checked', 'checked');
+      });
+
+      $('#sort_default').on('change', function() {
+        if($('#filter_none').attr('checked')) {
+          srch($('#q').val(), false);
+        } else {
+          srch($('#q').val(), true);
+        }
+      });
+
+      $('#sort_title').on('change', function(){s.sort_by('title');});
+      $('#sort_site').on('change', function(){s.sort_by('link');});
+
+      $('#view_default').on('change', function(){view('table');});
+      $('#view_google').on('change', function(){view('google');});
     </script>
 
   </body>

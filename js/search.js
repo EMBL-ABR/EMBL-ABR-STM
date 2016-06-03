@@ -26,6 +26,7 @@ var Search = Class.create({
 		this.response    = "";
 		this.refresh     = false;
 		this.ref_count   = 1;
+		this.items_len   = 0;
 	},
 
 	search: function(q, only_files, refresh) {
@@ -55,18 +56,17 @@ var Search = Class.create({
 				}
 				self.response = jQuery.parseJSON(data);
 				self.items = jQuery.parseJSON(data).items;
-				var items_len = 0;
 				if(self.items) {
-					items_len = self.items.length;
+					self.items_len = self.items.length;
 					for(var i = 0; i < self.items.length; i++) {
 						if (self.items[i].files.length == 0 && self.only_files) {
 							delete self.items[i];
-							items_len = items_len - 1;
+							self.items_len = self.items_len - 1;
 						}
 					}
 				}
 
-				if(items_len === 0) {
+				if(self.items_len === 0) {
 					self.no_results();
 				}
 				else {
@@ -89,10 +89,11 @@ var Search = Class.create({
 	show_results: function() {
 		this.table_view  = this.get_table_view();
 		this.google_view = this.get_google_view();
-		if($("#gradio:checked").val() == "on") {
-			$("#results").html(this.google_view);
-		} else {
-			$("#results").html(this.table_view);
+
+		if($('#filter_none').attr('checked')) {
+			$('#results').html(s.table_view);
+		} else if($('#filter_files').attr('checked')) {
+			$('#results').html(s.google_view);
 		}
 
 		if(typeof(this.response.queries.nextPage) == "undefined" ||
@@ -127,8 +128,9 @@ var Search = Class.create({
 
 		var table  = "<table class=\"table\"><thead>";
 		table     += "<tr><th><h4>Site</h4></th><th><h4>Title</h4></th><th><h4>Description</h4></th><th style=\"max-width: 300px; overflow-wrap: break-word;\"><h4>Files</h4></th></tr></thead><tbody>";
-		if (this.items.length == 0) {
-			table += "<tr><td colspan=\"4\"> No results found</td></tr></tbody></table>";
+		if (self.items_len === 0) {
+			self.no_results();
+			return;
 		} else {
 			for(var i = 0; i < this.items.length; i++) {
 				if(typeof(this.items[i]) != "undefined") {
@@ -142,8 +144,9 @@ var Search = Class.create({
 
 	get_google_view: function() {
 		var content = "";
-		if (this.items.length == 0) {
-			content += "No results found";
+		if (self.items_len === 0) {
+			self.no_results();
+			return;
 		} else {
 			for(var i = 0; i < this.items.length; i++) {
 				if(typeof(this.items[i]) != "undefined") {
@@ -168,7 +171,7 @@ var Search = Class.create({
 	},
 
 	sort_by: function(col) {
-		if(col == "-"||this.items.length == 0) return;
+		if(col === "-"||this.items.length == 0) return;
 		var sort_by = function(field, reverse, primer){
 			var key = primer ?
 			function(x) {return primer(x[field])} :

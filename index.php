@@ -81,17 +81,18 @@
         <h1>EMBL-ABR Search for Training Materials</h1>
         <p class="lead">Easily find bioinformatics training materials from institutions worldwide.</p>
       </div>
-
-    <form class="form-horizontal">
-      <div class="col-xs-7 col-xs-offset-2">
-        <input class="form-control input-lg" type="text" placeholder="Search" id="q">
-      </div>
-      <div class="col-xs-2" style="padding-left: 0px;">
-        <button type="button" class="btn btn-success btn-lg" onclick="goSearchURL($('#q').val());" id="search">Submit</button>
-      </div>
-    </form>
-
-    </div> <!-- /container -->
+    </div>
+    <div class="container" style="padding-top: 10px;">
+      <form class="form-horizontal">
+        <div class="col-xs-7 col-xs-offset-2">
+          <input class="form-control input-lg" type="text" placeholder="Search" id="q">
+        </div>
+        <div class="col-xs-2" style="padding-left: 0px;">
+          <button type="button" class="btn btn-success btn-lg" onclick="goSearchURL($('#q').val());" id="search">Submit</button>
+        </div>
+      </form>
+    </div>
+    
 
     <footer class="footer">
       <div class="container">
