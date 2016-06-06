@@ -82,6 +82,7 @@ var Search = Class.create({
 	},
 
 	no_results: function() {
+		$('#num_results').html("0 results");
 		$("#results").html("<div class=\"col-md-6 col-md-offset-3\"><div class=\"alert alert-danger\" role=\"alert\" style=\"clear: left; text-align: center;\">There were no results for that query. Please try a different search term.</div></div>");
 
 	},
@@ -90,9 +91,9 @@ var Search = Class.create({
 		this.table_view  = this.get_table_view();
 		this.google_view = this.get_google_view();
 
-		if($('#filter_none').attr('checked')) {
+		if($('#view_default').hasClass('active')) {
 			$('#results').html(s.table_view);
-		} else if($('#filter_files').attr('checked')) {
+		} else if($('#view_google').hasClass('active')) {
 			$('#results').html(s.google_view);
 		}
 
@@ -110,7 +111,11 @@ var Search = Class.create({
 		}
 
 		var results = this.response.searchInformation.totalResults > 100 ? "100+" : this.response.searchInformation.totalResults;
-		$('#num_results').html(results);
+		$('#num_results').html(results + " results");
+		if (self.items_len === 0) {
+			$('#num_results').html("0 results");
+		}
+		$("#bar_filter").css('display', '');
 
 		this.draw_pages(true);
 
@@ -118,10 +123,11 @@ var Search = Class.create({
 
 	hide_results: function() {
 		$("#results").html("");
-		$("#num_results").html("0");
+		$("#num_results").html("");
 		$('#pages').html("");
 		$('#next').css('display', 'none');
 		$('#prev').css('display', 'none');
+		$("#bar_filter").css('display', 'none');
 	},
 
 	get_table_view: function() {

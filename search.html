@@ -79,17 +79,17 @@
           <input class="form-control input-lg" type="text" placeholder="Search" id="q">
         </div>
         <div class="col-xs-2" style="padding-left: 0px;">
-          <button type="button" class="btn btn-success btn-lg" onclick="srch($('#q').val(), false);" id="search">Submit</button>
+          <button type="button" class="btn btn-success btn-lg" onclick="srch($('#q').val(), false, true);" id="search">Submit</button>
         </div>
       </form>
     </div>
 
-    <div class="container" style="padding-top: 20px;">
+    <div class="container" id="bar_filter"style="padding-top: 20px; display: none;">
       <div class="col-xs-3 col-xs-offset-2">
-        <p class="lead">0 Results</p>
+        <p class="lead" id="num_results"></p>
       </div>
       <div class="col-xs-3" style="padding-left: 0px;">
-        <p class="lead"><a href="#collapseExample" data-toggle="collapse">Options <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a></p>
+        <p class="lead"><a href="#collapseExample" data-toggle="collapse" class="collapsed" aria-hidden="true" id="collapse_opts">Options <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a></p>
       </div>
     </div>
 
@@ -112,21 +112,21 @@
         <div class="btn-toolbar" role="toolbar" style="clear: left;">
           <div class="col-xs-3 col-xs-offset-2">
             <div class="btn-group" data-toggle="buttons" aria-label="filter">
-              <label class="btn btn-success active"><input type="radio" name="options" id="filter_none" autocomplete="off" checked>None</label>
-              <label class="btn btn-success"><input type="radio" name="options" id="filter_files" autocomplete="off">Files Only</label>
+              <label class="btn btn-success active" id="filter_none"><input type="radio" name="options" autocomplete="off">None</label>
+              <label class="btn btn-success" id="filter_files"><input type="radio" name="options"  autocomplete="off">Files Only</label>
             </div>
           </div>
           <div class="col-xs-3" style="padding-left: 0px;">
             <div class="btn-group" data-toggle="buttons" aria-label="sort">
-              <label class="btn btn-success active"><input type="radio" name="options" id="sort_default" autocomplete="off" checked>Default</label>
-              <label class="btn btn-success"><input type="radio" name="options" id="sort_title" autocomplete="off">Title</label>
-              <label class="btn btn-success"><input type="radio" name="options" id="sort_site" autocomplete="off">Site</label>
+              <label class="btn btn-success active" id="sort_default"><input type="radio" name="options" autocomplete="off">Default</label>
+              <label class="btn btn-success" id="sort_title"><input type="radio" name="options" autocomplete="off">Title</label>
+              <label class="btn btn-success" id="sort_site"><input type="radio" name="options" autocomplete="off">Site</label>
             </div>
           </div>
           <div class="col-xs-3" style="padding-left: 0px;">
             <div class="btn-group" data-toggle="buttons" aria-label="view">
-              <label class="btn btn-success active"><input type="radio" name="options" id="view_default" autocomplete="off" checked>Default</label>
-              <label class="btn btn-success"><input type="radio" name="options" id="view_google" autocomplete="off">Google</label>
+              <label class="btn btn-success active" id="view_default"><input type="radio" name="options" autocomplete="off">Default</label>
+              <label class="btn btn-success" id="view_google"><input type="radio" name="options" autocomplete="off">Google</label>
             </div>
           </div>
         </div>
@@ -147,22 +147,61 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-
-    <!--<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>-->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
 
+    <!-- Custom js for searching, filtering, etc -->
     <script type="text/javascript">
       var s = new Search();
 
-      function srch(q, only_files) {
+      // ----------------
+      // SEARCH FUNCTIONS
+      // ----------------
+
+      function srch(q, only_files, q_changed) {
+        if(q_changed) {
+          // Reset the options and ensure options are hidden at first.
+          s = new Search();
+          resetFilter();
+          resetSort();
+          resetView();
+
+          // This is to hide the options bar
+          $('#collapse_opts').addClass('collapsed');
+          $('#collapse_opts').attr("aria-hidden","true");
+          $('#collapse_opts').attr("aria-expanded", "false");
+          $('#collapseExample').attr("aria-expanded", "false");
+          $('#collapseExample').removeClass("in");
+        }
+
+        // Do search
         s.search(q, only_files, true);
-        window.history.pushState('search', 'EMBL-ABR STM', '/search.html' + "?q=" + q + "&" + "onlyfiles=false");
+
+        // Update URL to match search term
+        window.history.pushState('search', 'EMBL-ABR STM', '/search.html' + "?q=" + q);
       }
 
+      $("#q").on( "keypress", function(event) {
+        // If user presses enter in search box
+        // act like they pushed submit and do the search
+
+        if (event.which == 13 && !event.shiftKey) {
+            event.preventDefault();
+            srch($('#q').val(), false, true);
+        }
+      });
+
+
+      // ----------------
+      // HELPER FUNCTIONS
+      // ----------------
+
       function getUrlVars() {
+        // Get the query from the URL
+        // This will occur if user has come from home page
+        // Or has bookmarked search URL
         var vars = {};
         var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
           vars[key] = value;
@@ -171,52 +210,107 @@
       }
 
       function view(v) {
+        // Change the view between table and google
         if(v === "table") {
-          $('#results').html(s.table_view);
+          $('#results').html(s.get_table_view());
         } else if(v === "google") {
-          $('#results').html(s.google_view);
+          $('#results').html(s.get_google_view());
         }
       }
 
-      $( document ).ready(function() {
-        var q = getUrlVars()["q"];
-        srch(q, false);
-        var txtbox = document.getElementById("q");
-        txtbox.value = txtbox.value + q;
-      });
 
-      $("q").on( "keypress", function(event) {
-        if (event.which == 13 && !event.shiftKey) {
-            event.preventDefault();
-            srch();
+      // -----------------------------------------
+      // DOCUMENT READY FUNCTION - CHECK FOR QUERY
+      // -----------------------------------------
+
+      $( document ).ready(function() {
+        // If we have a query already in URL then get it and search
+        var q = getUrlVars()["q"];
+        if(q) {
+          srch(q, false, true);
+          var txtbox = document.getElementById("q");
+          txtbox.value = txtbox.value + q;
         }
       });
 
+
+
+      // --------------------------------------
+      // RESETTING FUNCTIONS FOR OPTION BUTTONS
+      // --------------------------------------
+
+      function resetSort() {
+        $('#sort_default').addClass('active');
+        $('#sort_title').removeClass('active');
+        $('#sort_site').removeClass('active');
+      }
+
+      function resetFilter() {
+        $('#filter_none').addClass('active');
+        $('#filter_files').removeClass('active');
+      }
+
+      function resetView() {
+        $('#view_default').addClass('active');
+        $('#view_google').removeClass('active');
+      }
+
+
+      // ------------------------
+      // ONCLICK EVENTS - FILTERS
+      // ------------------------
+
       $('#filter_none').on('change', function(){
-        srch($('#q').val(), false);
-        $('#filter_files').removeAttr('checked');
-        $('#filter_none').attr('checked', 'checked');
+        srch($('#q').val(), false, false);
+        resetFilter();
+        resetSort();
       });
 
       $('#filter_files').on('change', function(){
-        srch($('#q').val(), true);
-        $('#filter_none').removeAttr('checked');
-        $('#filter_files').attr('checked', 'checked');
+        srch($('#q').val(), true, false);
+        resetSort();
+
+        $('#filter_none').removeClass('active');
+        $('#filter_files').addClass('active');
       });
 
+
+      // ------------------------
+      // ONCLICK EVENTS - SORTING
+      // ------------------------
+
       $('#sort_default').on('change', function() {
-        if($('#filter_none').attr('checked')) {
-          srch($('#q').val(), false);
+        if($('#filter_none').hasClass('active')) {
+          srch($('#q').val(), false, false);
         } else {
-          srch($('#q').val(), true);
+          srch($('#q').val(), true, false);
         }
       });
 
-      $('#sort_title').on('change', function(){s.sort_by('title');});
-      $('#sort_site').on('change', function(){s.sort_by('link');});
+      $('#sort_title').on('change', function() {
+        s.sort_by('title');
+      });
 
-      $('#view_default').on('change', function(){view('table');});
-      $('#view_google').on('change', function(){view('google');});
+      $('#sort_site').on('change', function(){
+        s.sort_by('link');
+      });
+
+
+      // ----------------------
+      // ONCLICK EVENTS - VIEWS
+      // ----------------------
+
+      $('#view_default').on('change', function(){
+        view('table');
+        resetView();
+      });
+
+      $('#view_google').on('change', function(){
+        view('google');
+        $('#view_default').removeClass('active');
+        $('#view_google').addClass('active');
+      });
+
     </script>
 
   </body>
