@@ -110,11 +110,23 @@
     <script src="js/ie10-viewport-bug-workaround.js"></script>
 
     <script type="text/javascript">
+
+      // This just sends the user to the search page with their query
       function goSearchURL(q) {
         if(q !== "") {
           location.href="/search.html?" + "q=" + q;
         }
       }
+
+      $("#q").on( "keypress", function(event) {
+        // If user presses enter in search box
+        // act like they pushed submit and do the search
+
+        if (event.which == 13 && !event.shiftKey) {
+            event.preventDefault();
+            goSearchURL($('#q').val());
+        }
+      });
     </script>
 
   </body>
