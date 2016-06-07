@@ -66,20 +66,37 @@
 
     <div class="container theme-showcase" role="main">
       <div class="starter-template">
-        <h1>Sources</h1>
-        <p class="lead">List of sources here</p>
+        <h2>Sources</h2>
+        <p>List of sources here</p>
 				<ul>
 					<li>Source 1</li>
 					<li>Source 2</li>
 					<li>Source 3</li>
 				</ul>
 
-				<h1>Request new additions</h1>
-				<p>Blurb about adding additions here</p>
-				<p>form for adding here</p>
+				<h2>Request new additions</h2>
+				<p>Blurb about adding new additions here</p>
+        <br/>
+        <div class="col-xs-10 col-md-6" style="padding-left: 0px;" id="requestForm">
+          <form>
+          <div class="form-group">
+            <label for="inputEmail">Your email address</label>
+            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label for="inputURL">The URL to include</label>
+            <input type="text" class="form-control" id="inputURL" placeholder="URL">
+          </div>
+          <div class="form-group">
+            <label for="inputReason">Why should it be included?</label>
+            <textarea class="form-control" rows="3" id="inputReason" placeholder="Reason for including"></textarea>
+          </div>
+          <button type="submit" class="btn btn-default" onclick="sendEmail();">Submit</button>
+        </form>
       </div>
-
-    </div> <!-- /container -->
+      <div class="alert alert-success" id="formSuccess" role="alert" style="display: none;">Thanks for your request. It has been successfully submitted.</div>
+    </div>
+  </div> <!-- /container -->
 
     <footer class="footer">
       <div class="container">
@@ -96,5 +113,32 @@
     <script src="js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <script>
+    function sendEmail(){
+      var e = $('#inputEmail').val();
+      var u = $('#inputURL').val();
+      var r = $('#inputReason').val();
+
+      $.post("add_request.php",
+      {
+          email: e,
+          addurl: u,
+          reason: r
+      },
+      function(data, status){
+        $('#requestForm').css("display", "none");
+        $('#formSuccess').css("display", "");
+        window.setTimeout(
+          function() {
+            $('#requestForm').css("display", "");
+            $('#formSuccess').css("display", "none");
+            $('#inputEmail').val("");
+            $('#inputURL').val("");
+            $('#inputReason').val("");
+          }
+        ,10000);
+      });
+    }
+    </script>
   </body>
 </html>
