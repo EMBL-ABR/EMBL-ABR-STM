@@ -46,3 +46,7 @@ body {
 .text-muted {
     color: #333;
 }
+
+.p {
+  font-size:16px;
+}
