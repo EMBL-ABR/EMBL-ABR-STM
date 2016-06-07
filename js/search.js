@@ -97,19 +97,6 @@ var Search = Class.create({
 			$('#results').html(s.google_view);
 		}
 
-		if(typeof(this.response.queries.nextPage) == "undefined" ||
-			this.response.queries.nextPage[0].startIndex > 100) {
-			$('#next').css('display', 'none');
-		} else {
-			$('#next').css('display', 'block');
-		}
-
-		if(typeof(this.response.queries.previousPage) == "undefined") {
-			$('#prev').css('display', 'none');
-		} else {
-			$('#prev').css('display', 'block');
-		}
-
 		var results = this.response.searchInformation.totalResults > 100 ? "100+" : this.response.searchInformation.totalResults;
 		$('#num_results').html(results + " results");
 		if (self.items_len === 0) {
@@ -228,7 +215,7 @@ var Search = Class.create({
 		var el        = $('#pages');
 
 		el.html("");
-
+		el.append("<li id=\"prev\"><a href=\"#\" aria-label=\"Previous\"  onclick=\"s.go_prev();return false;\"><span aria-hidden=\"true\">&laquo;</span></a></li>")
 
 		var show_first   = 5;
 		var show_last    = 3;
@@ -246,14 +233,13 @@ var Search = Class.create({
 				current <= i + show_middle)) {
 				var n = i + 1;
 				if(i != current) {
-					var span = $('<span></span>')
-									.addClass("page")
-									.append(
-										$('<a>' + n + '</a>')
-											.attr({ href: "#", onclick: "s.goto_page(" + i + ");"})
+					var span = $('<li></li>').append($('<a>' + n + '</a>')
+											.attr({ href: "#", onclick: "s.goto_page(" + i + ");return false;"})
 									);
 				} else {
-					var span = $('<span>' + n + '</span>').addClass("page");
+					var span = $('<li></li>').addClass("disabled").append($('<a>' + n + '</a>')
+											.attr({href: "#"})
+										);
 				}
 
 				el.append(span);
@@ -262,8 +248,19 @@ var Search = Class.create({
 				(i == show_first && i < current - show_middle) ||
 				(i == Math.max(current + show_middle, show_first) && i <= num_pages - show_last)
 				) {
-				el.append($('<span>...</span>').addClass("page"));
+				el.append($('<li>...</li>'));
 			}
+		}
+
+		el.append("<li><a href=\"#\" aria-label=\"Next\" id=\"next\"  onclick=\"s.go_next();return false;\"><span aria-hidden=\"true\">&raquo;</span></a></li>")
+
+
+		if(typeof(this.response.queries.nextPage) == "undefined" ||
+			this.response.queries.nextPage[0].startIndex > 100) {
+			$('#next').addClass('disabled');
+		}
+		if(typeof(this.response.queries.previousPage) == "undefined") {
+			$('#prev').addClass('disabled');
 		}
 	}
 
