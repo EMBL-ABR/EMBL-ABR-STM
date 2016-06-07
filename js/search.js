@@ -70,6 +70,7 @@ var Search = Class.create({
 					self.no_results();
 				}
 				else {
+					$('#pages').css("display", "");
 					self.show_results();
 					self.sort_by($('#sort').val());
 					if(self.refresh) {
@@ -84,7 +85,7 @@ var Search = Class.create({
 	no_results: function() {
 		$('#num_results').html("0 results");
 		$("#results").html("<div class=\"col-md-6 col-md-offset-3\"><div class=\"alert alert-danger\" role=\"alert\" style=\"clear: left; text-align: center;\">There were no results for that query. Please try a different search term.</div></div>");
-
+		$('#pages').css("display", "none");
 	},
 
 	show_results: function() {
