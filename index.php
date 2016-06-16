@@ -64,7 +64,6 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="/">Home</a></li>
-            <li><a href="search.html">Search</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="sources.html">Sources</a></li>
             <li><a href="contact.html">Contact</a></li>
@@ -77,7 +76,7 @@
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="starter-template">
-        <img src="img/embl-au-logo.jpg" style="width: 35%; display: block; margin-left: auto; margin-right: auto; padding-bottom: 10px;"/>
+        <img src="img/embl-au-logo.jpg" style="width: 25%; display: block; margin-left: auto; margin-right: auto; padding-bottom: 10px;"/>
         <h1>EMBL-ABR Search for Training Materials</h1>
         <p class="lead">Easily find bioinformatics training materials from institutions worldwide.</p>
       </div>
@@ -88,14 +87,79 @@
           <input class="form-control input-lg" type="text" placeholder="Search" id="q">
         </div>
         <div class="col-xs-2" style="padding-left: 0px;">
-          <button type="button" class="btn btn-success btn-lg" onclick="goSearchURL($('#q').val());" id="search">Submit</button>
+          <button type="button" class="btn btn-success btn-lg"onclick="srch($('#q').val(), false, true);" id="search">Submit</button>
         </div>
       </form>
     </div>
 
+    <div class="container" id="bar_filter"style="padding-top: 20px; display: none;">
+      <div class="col-xs-3 col-xs-offset-2">
+        <p class="lead" id="num_results"></p>
+      </div>
+      <div class="col-xs-3" style="padding-left: 0px;">
+        <p class="lead"><a href="#collapseExample" data-toggle="collapse" class="collapsed" aria-hidden="true" id="collapse_opts">Options <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a></p>
+      </div>
+    </div>
+
+    <div class="collapse" id="collapseExample">
+      <div class="container">
+        <div style="clear: left;">
+          <div class="col-xs-3 col-xs-offset-2">
+            <h4> Filter </h4>
+          </div>
+          <div class="col-xs-3" style="padding-left: 0px;">
+            <h4> Sort </h4>
+          </div>
+          <div class="col-xs-3" style="padding-left: 0px;">
+            <h4> View </h4>
+          </div>
+          <div class="col-xs-1"></div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="btn-toolbar" role="toolbar" style="clear: left;">
+          <div class="col-xs-3 col-xs-offset-2">
+            <div class="btn-group" data-toggle="buttons" aria-label="filter">
+              <label class="btn btn-success active" id="filter_none"><input type="radio" name="options" autocomplete="off">None</label>
+              <label class="btn btn-success" id="filter_files"><input type="radio" name="options"  autocomplete="off">Files Only</label>
+            </div>
+          </div>
+          <div class="col-xs-3" style="padding-left: 0px;">
+            <div class="btn-group" data-toggle="buttons" aria-label="sort">
+              <label class="btn btn-success active" id="sort_default"><input type="radio" name="options" autocomplete="off">Default</label>
+              <label class="btn btn-success" id="sort_title"><input type="radio" name="options" autocomplete="off">Title</label>
+              <label class="btn btn-success" id="sort_site"><input type="radio" name="options" autocomplete="off">Site</label>
+            </div>
+          </div>
+          <div class="col-xs-3" style="padding-left: 0px;">
+            <div class="btn-group" data-toggle="buttons" aria-label="view">
+              <label class="btn btn-success active" id="view_default"><input type="radio" name="options" autocomplete="off">Default</label>
+              <label class="btn btn-success" id="view_google"><input type="radio" name="options" autocomplete="off">Google</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- /container -->
+    <div class="container" style="padding-top: 20px">
+      <div class="col-xs-10 col-xs-offset-1">
+        <div id="results"></div>
+      </div>
+    </div>
+
+
+    <div class="container">
+      <div class="col-md-12 text-center">
+        <nav>
+          <ul class="pagination" id="pages">
+
+          </ul>
+        </nav>
+      </div>
+    </div>
+
     <footer class="footer">
       <div class="container">
-        <p class="text-muted">&copy; EMBL-ABR 2016</p>
+        <p class="text-muted"></p>
       </div>
     </footer>
 
@@ -109,13 +173,34 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
 
+    <!-- Custom js for searching, filtering, etc -->
     <script type="text/javascript">
+      var s = new Search();
 
-      // This just sends the user to the search page with their query
-      function goSearchURL(q) {
-        if(q !== "") {
-          location.href="/search.html?" + "q=" + q;
+      // ----------------
+      // SEARCH FUNCTIONS
+      // ----------------
+
+      function srch(q, only_files, q_changed) {
+        if(q_changed) {
+          // Reset the options and ensure options are hidden at first.
+          s = new Search();
+          resetFilter();
+          resetSort();
+          resetView();
+
+          // This is to hide the options bar
+          $('#collapse_opts').addClass('collapsed');
+          $('#collapse_opts').attr("aria-hidden","true");
+          $('#collapse_opts').attr("aria-expanded", "false");
+          $('#collapseExample').attr("aria-expanded", "false");
+          $('#collapseExample').removeClass("in");
         }
+
+        // Do search
+        s.search(q, only_files, true);
+
+        window.history.pushState('search', 'EMBL-ABR STM', '/' + "?q=" + q);
       }
 
       $("#q").on( "keypress", function(event) {
@@ -124,9 +209,127 @@
 
         if (event.which == 13 && !event.shiftKey) {
             event.preventDefault();
-            goSearchURL($('#q').val());
+            srch($('#q').val(), false, true);
         }
       });
+
+
+      // ----------------
+      // HELPER FUNCTIONS
+      // ----------------
+
+      function getUrlVars() {
+        // Get the query from the URL
+        // This will occur if user has come from home page
+        // Or has bookmarked search URL
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+          vars[key] = value;
+        });
+        return vars;
+      }
+
+      function view(v) {
+        // Change the view between table and google
+        if(v === "table") {
+          $('#results').html(s.get_table_view());
+        } else if(v === "google") {
+          $('#results').html(s.get_google_view());
+        }
+      }
+
+
+      // -----------------------------------------
+      // DOCUMENT READY FUNCTION - CHECK FOR QUERY
+      // -----------------------------------------
+
+      $( document ).ready(function() {
+        // If we have a query already in URL then get it and search
+        var q = getUrlVars()["q"];
+        if(q) {
+          srch(q, false, true);
+          var txtbox = document.getElementById("q");
+          txtbox.value = txtbox.value + q;
+        }
+      });
+
+
+      // --------------------------------------
+      // RESETTING FUNCTIONS FOR OPTION BUTTONS
+      // --------------------------------------
+
+      function resetSort() {
+        $('#sort_default').addClass('active');
+        $('#sort_title').removeClass('active');
+        $('#sort_site').removeClass('active');
+      }
+
+      function resetFilter() {
+        $('#filter_none').addClass('active');
+        $('#filter_files').removeClass('active');
+      }
+
+      function resetView() {
+        $('#view_default').addClass('active');
+        $('#view_google').removeClass('active');
+      }
+
+
+      // ------------------------
+      // ONCLICK EVENTS - FILTERS
+      // ------------------------
+
+      $('#filter_none').on('change', function(){
+        srch($('#q').val(), false, false);
+        resetFilter();
+        resetSort();
+      });
+
+      $('#filter_files').on('change', function(){
+        srch($('#q').val(), true, false);
+        resetSort();
+
+        $('#filter_none').removeClass('active');
+        $('#filter_files').addClass('active');
+      });
+
+
+      // ------------------------
+      // ONCLICK EVENTS - SORTING
+      // ------------------------
+
+      $('#sort_default').on('change', function() {
+        if($('#filter_none').hasClass('active')) {
+          srch($('#q').val(), false, false);
+        } else {
+          srch($('#q').val(), true, false);
+        }
+      });
+
+      $('#sort_title').on('change', function() {
+        s.sort_by('title');
+      });
+
+      $('#sort_site').on('change', function(){
+        s.sort_by('link');
+      });
+
+
+      // ----------------------
+      // ONCLICK EVENTS - VIEWS
+      // ----------------------
+
+      $('#view_default').on('change', function(){
+        view('table');
+        resetView();
+      });
+
+      $('#view_google').on('change', function(){
+        view('google');
+        $('#view_default').removeClass('active');
+        $('#view_google').addClass('active');
+      });
+
     </script>
 
   </body>
