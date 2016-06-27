@@ -30,6 +30,8 @@ var Search = Class.create({
 	},
 
 	search: function(q, only_files, refresh) {
+		$("#results").html("<p class='text-center'><i class='fa fa-spinner fa-pulse fa-3x fa-fw>'</i><span class='sr-only'>Loading...</span></p>")
+
 		var prev_q      = this.q;
 
 		this.q          = (typeof(q)          == "undefined") ? this.q : q;
@@ -41,6 +43,7 @@ var Search = Class.create({
 
 		if(prev_q != this.q) {
 			this.hide_results();
+			$("#results").html("<p class='text-center'><i class='fa fa-spinner fa-pulse fa-3x fa-fw>'</i><span class='sr-only'>Loading...</span></p>")
 		}
 
 		var req = this.url + "?q=" + encodeURIComponent(this.q);
