@@ -83,6 +83,7 @@
           </row>
         </div>
         <h1>EMBL-ABR Search for Training Materials <span class="label label-default" style="font-size: 50%; vertical-align: middle;">Beta</span></h1>
+        <p class="lead" id="search_form_scroll">Easily find bioinformatics training materials from institutions worldwide.</p>
       </div>
     </div>
     <div class="container" style="padding-top: 10px;">
@@ -212,6 +213,9 @@
         s.search(q, only_files, true);
 
         window.history.pushState('search', 'EMBL-ABR STM', '/' + "?q=" + q);
+        var divPosition = $('#search_form_scroll').offset();
+        $('html, body').animate({scrollTop: divPosition.top}, "slow");
+
       }
 
       $("#q").on( "keypress", function(event) {
