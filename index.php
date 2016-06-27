@@ -249,7 +249,7 @@
         if(q) {
           srch(q, false, true);
           var txtbox = document.getElementById("q");
-          txtbox.value = txtbox.value + q;
+          txtbox.value = decodeURI(q);
         }
       });
 
