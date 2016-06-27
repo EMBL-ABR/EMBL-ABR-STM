@@ -27,6 +27,8 @@ if($idx = strpos($q, '&')) {
 	$q     = urlencode($query).$q;
 } else {
 	$q = urlencode($q);
+	file_put_contents("query_log.txt", $q, FILE_APPEND);
+	file_put_contents("query_log.txt", PHP_EOL, FILE_APPEND);
 }
 
 $s = new Search();
