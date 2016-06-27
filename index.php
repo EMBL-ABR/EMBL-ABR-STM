@@ -59,7 +59,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">EMBL-ABR STM</a>
+          <a class="navbar-brand" href="https://www.embl-abr.org.au/">EMBL-ABR</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -73,12 +73,15 @@
     </nav>
 
     <div class="container theme-showcase" role="main">
-
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="starter-template">
-        <img src="img/embl-au-logo.jpg" style="width: 25%; display: block; margin-left: auto; margin-right: auto; padding-bottom: 10px;"/>
-        <h1>EMBL-ABR Search for Training Materials</h1>
-        <p class="lead">Easily find bioinformatics training materials from institutions worldwide.</p>
+        <div class="container">
+          <row>
+            <div class="col-md-4 col-md-offset-4 col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-4">
+              <a href='https://www.embl-abr.org.au/'><img src="img/embl-au-logo.jpg" style="width: 100%; display: block; margin-left: auto; margin-right: auto; padding-bottom: 10px;"/></a>
+            </div>
+          </row>
+        </div>
         <h1>EMBL-ABR Search for Training Materials <span class="label label-default" style="font-size: 50%; vertical-align: middle;">Beta</span></h1>
       </div>
     </div>
