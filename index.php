@@ -79,6 +79,7 @@
         <img src="img/embl-au-logo.jpg" style="width: 25%; display: block; margin-left: auto; margin-right: auto; padding-bottom: 10px;"/>
         <h1>EMBL-ABR Search for Training Materials</h1>
         <p class="lead">Easily find bioinformatics training materials from institutions worldwide.</p>
+        <h1>EMBL-ABR Search for Training Materials <span class="label label-default" style="font-size: 50%; vertical-align: middle;">Beta</span></h1>
       </div>
     </div>
     <div class="container" style="padding-top: 10px;">
@@ -140,12 +141,19 @@
         </div>
       </div>
     </div> <!-- /container -->
+
     <div class="container" style="padding-top: 20px">
       <div class="col-xs-10 col-xs-offset-1">
-        <div id="results"></div>
+        <div id="results">
+          <div class="row" style="padding-top:10px;">
+
+              <div class="col-xs-10 col-xs-offset-1">
+                <div class="alert alert-success text-center" role="alert">Note: EMBL-ABR STM is currently in beta and has a limit of 100 queries per 24 hours. </div>
+              </div>
+              </div>
+          </div>
       </div>
     </div>
-
 
     <div class="container">
       <div class="col-md-12 text-center">
