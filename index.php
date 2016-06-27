@@ -87,21 +87,21 @@
     </div>
     <div class="container" style="padding-top: 10px;">
       <form class="form-horizontal">
-        <div class="col-xs-7 col-xs-offset-2">
+        <div class="col-md-7 col-md-offset-2 col-xs-9 col-sm-7 col-sm-offset-2">
           <input class="form-control input-lg" type="text" placeholder="Search" id="q">
         </div>
         <div class="col-xs-2" style="padding-left: 0px;">
-          <button type="button" class="btn btn-success btn-lg"onclick="srch($('#q').val(), false, true);" id="search">Submit</button>
+          <button type="button" class="btn btn-success btn-lg" onclick="srch($('#q').val(), false, true);" id="search">Submit</button>
         </div>
       </form>
     </div>
 
-    <div class="container" id="bar_filter"style="padding-top: 20px; display: none;">
+    <div class="container" id="bar_filter" style="padding-top: 20px; display: none;">
       <div class="col-xs-3 col-xs-offset-2">
         <p class="lead" id="num_results"></p>
       </div>
       <div class="col-xs-3" style="padding-left: 0px;">
-        <p class="lead"><a href="#collapseExample" data-toggle="collapse" class="collapsed" aria-hidden="true" id="collapse_opts">Options <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a></p>
+        <p class="lead"><a href="#collapseExample" data-toggle="collapse" class="collapsed" aria-hidden="true" id="collapse_opts">Options <span id="optionsicon" class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a></p>
       </div>
     </div>
 
