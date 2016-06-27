@@ -68,8 +68,11 @@ var Search = Class.create({
 						}
 					}
 				}
-
-				if(self.items_len === 0) {
+				var limit = jQuery.parseJSON(data).limit;
+				if(limit) {
+					self.limit_results();
+				}
+				else if(self.items_len === 0) {
 					self.no_results();
 				}
 				else {
@@ -88,6 +91,12 @@ var Search = Class.create({
 	no_results: function() {
 		$('#num_results').html("0 results");
 		$("#results").html("<div class=\"col-md-6 col-md-offset-3\"><div class=\"alert alert-danger\" role=\"alert\" style=\"clear: left; text-align: center;\">There were no results for that query. Please try a different search term.</div></div>");
+		$('#pages').css("display", "none");
+	},
+
+	limit_results: function() {
+		$('#num_results').html("0 results");
+		$("#results").html("<div class=\"col-md-6 col-md-offset-3\"><div class=\"alert alert-danger\" role=\"alert\" style=\"clear: left; text-align: center;\">We have reached our query limit for today. Please try again tomorrow. We apologise for any inconvenience.</div></div>");
 		$('#pages').css("display", "none");
 	},
 

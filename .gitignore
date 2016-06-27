@@ -2,3 +2,5 @@ cache.json
 requests.json
 settings.php
 vendor
+limit.json
+query_log.txt

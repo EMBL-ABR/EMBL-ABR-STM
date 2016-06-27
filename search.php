@@ -17,18 +17,21 @@ You may obtain a copy of the License at
 */
 
 require_once("cache.php");
+require_once("limit.php");
 
 class Search {
 
 	private $cache;
 	private $google_url;
 	private $response;
+	private $limit;
 
 	public function __construct() {
 		$this->cache      = new Cache();
 		$this->google_url = "https://www.googleapis.com/customsearch/v1?key=".GSEARCH_API_KEY;
 		$this->response   = False;
 		$this->is_windows = PHP_OS == "WINNT" || PHP_OS == "WIN32";
+		$this->limit = new Limit();
 
 	}
 
@@ -36,18 +39,27 @@ class Search {
 		$req = $this->google_url."&q=".$q;
 		$this->response = $this->get_results($req);
 		$this->response = $this->get_files($this->response);
-		
+
 		$this->prepare_next_req($req);
 
+
+		if($this->response == "null") {
+			$d = array('limit' => 'reached');
+			return json_encode($d);
+		}
 		return $this->response;
 	}
 
 	private function get_results($req) {
-
+		//file_put_contents("madi.txt", $req, FILE_APPEND);
 		$response = $this->cache_search($req);
-
-		if(!$response) {
-			$response = $this->google_search($req);
+		//file_put_contents("madi2.txt", $response);
+		if($this->limit->get_limit() < 95) {
+			if(!$response) {
+				//file_put_contents("madi3.txt", "1", FILE_APPEND);
+				$response = $this->google_search($req);
+				$this->limit->increment_limit();
+			}
 		}
 
 		return $response;
