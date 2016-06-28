@@ -51,10 +51,9 @@
       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
       ga('create', 'UA-79997520-1', 'auto');
-      ga('send', 'pageview');
+      ga('send', 'pageview', "/");
 
     </script>
-    
   </head>
 
   <body role="document">
@@ -210,6 +209,9 @@
           resetFilter();
           resetSort();
           resetView();
+
+          // Google analytics
+          ga('send', 'pageview', 'search?q=' + q);
 
           // This is to hide the options bar
           $('#collapse_opts').addClass('collapsed');
