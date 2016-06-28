@@ -40,7 +40,7 @@ class Search {
 		$this->response = $this->get_results($req);
 		$this->response = $this->get_files($this->response);
 
-		$this->prepare_next_req($req);
+		//$this->prepare_next_req($req);
 
 
 		if($this->response == "null") {

@@ -96,7 +96,7 @@ var Search = Class.create({
 
 	limit_results: function() {
 		$('#num_results').html("0 results");
-		$("#results").html("<div class=\"col-md-6 col-md-offset-3\"><div class=\"alert alert-danger\" role=\"alert\" style=\"clear: left; text-align: center;\">We have reached our query limit for today. Please try again tomorrow. We apologise for any inconvenience.</div></div>");
+		$("#results").html("<div class=\"col-md-6 col-md-offset-3\"><div class=\"alert alert-danger\" role=\"alert\" style=\"clear: left; text-align: center;\">Note: EMBL-ABR STM is currently in beta and has a limit of 100 queries per 24 hours. We have reached our query limit for today. Please try again tomorrow. We apologise for any inconvenience.</div></div>");
 		$('#pages').css("display", "none");
 	},
 
@@ -110,7 +110,7 @@ var Search = Class.create({
 			$('#results').html(s.google_view);
 		}
 
-		var results = this.response.searchInformation.totalResults > 100 ? "100+" : this.response.searchInformation.totalResults;
+		var results = this.response.searchInformation.totalResults > 50 ? "50+" : this.response.searchInformation.totalResults;
 		$('#num_results').html(results + " results");
 		if (self.items_len === 0) {
 			$('#num_results').html("0 results");
@@ -235,7 +235,7 @@ var Search = Class.create({
 		var show_middle  = 2;
 
 		if(first_10) {
-			num_pages  = Math.min(num_pages, 10);
+			num_pages  = Math.min(num_pages, 5);
 			show_first = 10;
 		}
 
@@ -265,11 +265,11 @@ var Search = Class.create({
 			}
 		}
 
-		el.append("<li><a href=\"#\" aria-label=\"Next\" id=\"next\"  onclick=\"s.go_next();return false;\"><span aria-hidden=\"true\">&raquo;</span></a></li>")
+		el.append("<li id=\"next\"><a href=\"#\" aria-label=\"Next\" onclick=\"s.go_next();return false;\"><span aria-hidden=\"true\">&raquo;</span></a></li>")
 
 
 		if(typeof(this.response.queries.nextPage) == "undefined" ||
-			this.response.queries.nextPage[0].startIndex > 100) {
+			this.response.queries.nextPage[0].startIndex > 50) {
 			$('#next').addClass('disabled');
 		}
 		if(typeof(this.response.queries.previousPage) == "undefined") {
