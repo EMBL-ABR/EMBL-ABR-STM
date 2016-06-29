@@ -59,13 +59,13 @@ class Cache {
 		$i = 0;
 		foreach ($this->entries as $item) {
 			if($item['req'] == $req) {
-				$ts = new DateTime($item['ts']);
-				if ($cache_limit > $ts) {
-					$this->delete_idx($i);
-					return False;
-				} else {
+				//$ts = new DateTime($item['ts']);
+				//if ($cache_limit > $ts) {
+					//$this->delete_idx($i);
+					//return False;
+				//} else {
 					return json_encode($item['resp']);
-				}
+				//}
 			}
 			$i++;
 		}
