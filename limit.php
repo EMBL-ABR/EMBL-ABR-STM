@@ -17,6 +17,10 @@ You may obtain a copy of the License at
 */
 require_once("settings.php");
 
+# Include the Autoloader (see "Libraries" for install instructions)
+require('vendor/autoload.php');
+use Mailgun\Mailgun;
+
 Class Limit {
     public function get_limit() {
       $entries = json_decode(file_get_contents(LIMIT_FILE), True);
@@ -31,16 +35,17 @@ Class Limit {
     private function set_limit($limit) {
       $d = array('limit' => $limit);
       file_put_contents(LIMIT_FILE, json_encode($d));
-      if($limit > 94) {
-        $to      = 'madisonflannery93@gmail.com';
-        $subject = 'STM limit reached';
-        $message = 'STM limit has been reached.';
-        $headers = 'From: stm-no-reply@embl-abr.org.au' . "\r\n" .
-            'Reply-To: contact@embl-abr.org.au' . "\r\n" .
-            'X-Mailer: PHP/' . phpversion();
+      if($limit > 90) {
+        file_put_contents("text.txt", $limit);
+        // Instantiate the client.
 
-        mail($to, $subject, $message, $headers);
+        # Make the call to the client.
+        $result = $mgClient->sendMessage($domain, array(
+            'subject' => 'STM LIMIT REACHED',
+            'text'    => 'STM Limit is reached'
+        ));
       }
+
     }
 }
 
