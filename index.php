@@ -36,7 +36,8 @@
     <![endif]-->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="https://digg.googlecode.com/files/Class-0.0.2.js"></script>
+    <!-- <script src="https://digg.googlecode.com/files/Class-0.0.2.js"></script> -->
+    <script type="text/javascript" src="js/class.js"></script>
     <script type="text/javascript" src="js/search.js"></script>
 
     <style>
