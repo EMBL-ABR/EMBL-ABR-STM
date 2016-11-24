@@ -5,3 +5,5 @@ vendor
 limit.json
 query_log.txt
 madi3.txt
+*.pyc
+db.sqlite3

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+    <!-- Logo and big title. -->
+    <div class="container">
+        <row>
+            <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-10 col-xs-offset-1">
+                <a href='https://www.embl-abr.org.au/'>
+                    <img id="embl_abr_logo" src="{% static 'img/embl-au-logo.jpg' %}"/>
+                </a>
+            </div>
+        </row>
+        <row>
+            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                <h1>EMBL-ABR Search for Training Materials <span class="label label-default" id="beta_label">Beta</span></h1>
+                <p class="lead" id="search_form_scroll">Easily find bioinformatics training materials from institutions worldwide.</p>
+            </div>
+        </row>
+    </div>
+
+    <!-- Search form. -->
+    <div class="container" style="padding-top: 10px;">
+        <form class="form-horizontal">
+            <div class="col-md-7 col-md-offset-2 col-sm-7 col-sm-offset-2 col-xs-9">
+                <input class="form-control input-lg" type="text" placeholder="Search" id="q">
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-2" style="padding-left: 0px;">
+                <button type="button" class="btn btn-success btn-lg" onclick="srch($('#q').val(), false, true);" id="search">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Beta disclaimer. -->
+    <div class="container" style="padding-top: 20px">
+        <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+            <div class="alert alert-success text-center" role="alert">Note: EMBL-ABR STM is currently in beta and has a limit of 100 queries per 24 hours. </div>
+        </div>
+    </div>
+
+{% endblock %}
