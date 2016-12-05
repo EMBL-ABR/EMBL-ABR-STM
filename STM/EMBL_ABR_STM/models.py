@@ -22,3 +22,10 @@ class Source(models.Model):
 
     def __str__(self):
         return self.source_url
+
+class Request(models.Model):
+    email = models.CharField(max_length=300)
+    source_url = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.source_url
