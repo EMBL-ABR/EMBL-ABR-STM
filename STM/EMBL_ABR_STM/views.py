@@ -23,4 +23,8 @@ def sources(request):
     template = loader.get_template('sources.html')
     context = {"active_page" : "sources", "sources_list" : sources_list}
     return HttpResponse(template.render(context, request))
+
+def contact(request):
+    template = loader.get_template('contact.html')
+    context = {"active_page" : "contact"}
     return HttpResponse(template.render(context, request))
