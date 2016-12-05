@@ -15,3 +15,10 @@ class Query(models.Model):
 
     def __str__(self):
         return self.search_term + " - " + self.page_num
+
+class Source(models.Model):
+    source_url = models.CharField(max_length=300)
+    is_australian = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.source_url
